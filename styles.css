@@ -1,0 +1,232 @@
+/* PALETA VINTAGE PASTEL AÑOS 60 */
+:root {
+  --bg-cream: #fdfbf7;
+  --pastel-mint: #a8e6cf;
+  --pastel-coral: #ffaaa5;
+  --pastel-butter: #fcf6bd;
+  --pastel-sky: #a0c4ff;
+  --text-charcoal: #2b2d42;
+  --text-soft: #4a4e69;
+}
+
+.vintage-pastel-body {
+  background-color: var(--bg-cream) !important;
+  color: var(--text-charcoal) !important;
+  font-family: 'Poppins', sans-serif;
+}
+
+.vintage-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  letter-spacing: 0.5px;
+}
+
+.text-charcoal { color: var(--text-charcoal) !important; }
+.text-charcoal-soft { color: var(--text-soft) !important; }
+.text-coral { color: #e06358 !important; }
+.border-pastel { border: 1.5px solid #d8d2c5 !important; }
+
+/* NAVBAR GLASSMORPHISM PASTEL */
+.custom-navbar {
+  background: rgba(253, 251, 247, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid var(--pastel-mint);
+  z-index: 1030;
+}
+
+.badge-pastel-mint {
+  background-color: var(--pastel-mint);
+  color: var(--text-charcoal);
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.btn-pastel-tab {
+  background-color: #ffffff;
+  color: var(--text-charcoal);
+  border: 1.5px solid var(--pastel-mint);
+  font-weight: 600;
+}
+
+.btn-pastel-tab.active, .btn-pastel-tab:hover {
+  background-color: var(--pastel-mint);
+  color: var(--text-charcoal);
+}
+
+/* HERO BANNER */
+.hero-banner {
+  background: linear-gradient(135deg, #fcf6bd 0%, #fdfbf7 50%, #a8e6cf 100%);
+  border-bottom: 2px dashed var(--pastel-coral);
+}
+
+.hero-logo {
+  height: 75px;
+  object-fit: contain;
+}
+
+.vintage-pill {
+  display: inline-block;
+  padding: 5px 16px;
+  background-color: var(--pastel-coral);
+  color: var(--text-charcoal);
+  border-radius: 25px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+/* TARJETAS VINTAGE */
+.card-vintage {
+  background-color: #ffffff;
+  border: 2px solid #ece6d8;
+  border-radius: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.card-vintage:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(43, 45, 66, 0.12);
+  border-color: var(--pastel-coral);
+}
+
+.card-img-wrapper {
+  overflow: hidden;
+  height: 210px;
+  position: relative;
+}
+
+.card-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.card-vintage:hover .card-img-wrapper img {
+  transform: scale(1.06);
+}
+
+/* BOTONES PASTEL */
+.btn-pastel-coral {
+  background-color: var(--pastel-coral);
+  color: var(--text-charcoal);
+  border: none;
+  font-weight: 600;
+}
+
+.btn-pastel-coral:hover {
+  background-color: #ff948e;
+  color: var(--text-charcoal);
+}
+
+.btn-pastel-mint {
+  background-color: var(--pastel-mint);
+  color: var(--text-charcoal);
+  border: none;
+  font-weight: 600;
+}
+
+.btn-pastel-mint:hover {
+  background-color: #8ee0c0;
+  color: var(--text-charcoal);
+}
+
+/* BOTÓN FLOTANTE CARRITO */
+.cart-floating-btn {
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  z-index: 1040;
+  transition: transform 0.3s ease;
+}
+
+.cart-floating-btn:hover {
+  transform: scale(1.1) rotate(-6deg);
+}
+
+.modal-vintage-bg {
+  background-color: var(--bg-cream);
+  color: var(--text-charcoal);
+  border: 2px solid var(--pastel-mint);
+}
+
+/* ==========================================================================
+   AISLAMIENTO CSS ESTRICTO PARA DOCUMENTOS PDF (.pdf-doc-root)
+   ========================================================================== */
+.pdf-doc-root {
+  background-color: #ffffff !important;
+  color: #333333 !important;
+  font-family: Arial, sans-serif !important;
+  padding: 20px !important;
+}
+
+.pdf-doc-root h1, .pdf-doc-root h2, .pdf-doc-root h3,
+.pdf-doc-root h4, .pdf-doc-root h5, .pdf-doc-root h6 {
+  color: #111111 !important;
+}
+
+.pdf-doc-root p, .pdf-doc-root span, .pdf-doc-root td, .pdf-doc-root th, .pdf-doc-root div {
+  color: #333333 !important;
+}
+
+/* FOOTER VINTAGE PASTEL */
+footer {
+  background: linear-gradient(135deg, #a8e6cf 0%, #fcf6bd 50%, #ffaaa5 100%);
+  color: var(--text-charcoal);
+  padding: 50px 0 30px;
+  text-align: center;
+  margin-top: 40px;
+  border-top: 3px dashed #2b2d42;
+}
+
+footer img.footer-avatar {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  border: 4px solid #ffffff;
+  margin-bottom: 15px;
+  object-fit: cover;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+footer h4 {
+  font-weight: 800;
+  color: var(--text-charcoal);
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+
+footer p.bio {
+  font-size: 16px;
+  color: var(--text-charcoal);
+  max-width: 700px;
+  margin: 0 auto 20px;
+  line-height: 1.6;
+}
+
+.social-icons-footer {
+  margin: 20px 0;
+}
+
+.social-icons-footer a {
+  color: var(--text-charcoal);
+  background-color: #ffffff;
+  width: 48px;
+  height: 48px;
+  line-height: 48px;
+  border-radius: 50%;
+  font-size: 22px;
+  margin: 0 10px;
+  display: inline-block;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.social-icons-footer a:hover {
+  background-color: var(--text-charcoal);
+  color: #ffffff;
+  transform: translateY(-4px);
+}

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BROKEN VINTAGE | Edición Vintage Pastel 60s</title>
+  
+  <!-- Google Fonts Años 60 -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Bootstrap 5.3.3 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- FontAwesome 6.5.1 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <!-- SweetAlert2 -->
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+  <!-- Estilos Personalizados -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="vintage-pastel-body">
+
+  <!-- NAVBAR STICKY GLASSMORPHISM PASTEL -->
+  <nav class="navbar navbar-expand-lg sticky-top custom-navbar">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+        <i class="fa-solid fa-car-side fs-4 text-coral"></i>
+        <span class="fw-bold vintage-title text-charcoal">ROYAL MOTORS <span class="badge-pastel-mint">60s VINTAGE</span></span>
+      </a>
+      
+      <div class="d-flex align-items-center gap-2 ms-auto ms-lg-0 order-lg-last">
+        <div class="btn-group btn-group-sm" role="group">
+          <button type="button" class="btn btn-pastel-tab active" id="tabAll" onclick="filterCategory('todos')">Todos</button>
+          <button type="button" class="btn btn-pastel-tab" id="tabVehiculos" onclick="filterCategory('vehiculos')">Autos</button>
+          <button type="button" class="btn btn-pastel-tab" id="tabMotos" onclick="filterCategory('motos')">Motos</button>
+        </div>
+      </div>
+
+      <div class="w-100 w-lg-auto my-2 my-lg-0 px-lg-3 flex-grow-1">
+        <div class="input-group">
+          <span class="input-group-text bg-white border-pastel text-charcoal"><i class="fa-solid fa-magnifying-glass"></i></span>
+          <input type="text" id="searchInput" class="form-control bg-white border-pastel text-charcoal" placeholder="Buscar clásico o superbike por marca o modelo..." onkeyup="searchCatalog()">
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO BANNER VINTAGE PASTEL 60s -->
+  <header class="hero-banner text-center py-5">
+    <div class="container">
+      <img src="assets/logo_pagina.png" alt="Luxury Motors Logo" class="hero-logo mb-3" onerror="this.src='https://cdn-icons-png.flaticon.com/512/744/744465.png'">
+      <div class="mb-2">
+        <span class="vintage-pill">★ EDICIÓN ESPECIAL VINTAGE 1960s ★</span>
+      </div>
+      <h1 class="display-4 fw-bold text-uppercase vintage-title text-charcoal">OFERTAS <span class="text-coral">LUXURY  </span></h1>
+      <p class="lead text-charcoal-soft mx-auto" style="max-width: 650px;">
+        Elegancia clásica de los años 60 en tonos pastel, fusionada con ingeniería de alto rendimiento. Venta y alquiler exclusivo.
+      </p>
+    </div>
+  </header>
+
+  <!-- CATÁLOGO PRINCIPAL -->
+  <main class="container my-5">
+    <section>
+      <div class="row g-4" id="catalogContainer">
+        <!-- Renderizado dinámico vía JavaScript -->
+      </div>
+    </section>
+  </main>
+
+  <!-- BOTÓN FLOTANTE DEL CARRITO -->
+  <button class="cart-floating-btn btn btn-pastel-coral rounded-circle shadow-lg position-fixed d-flex align-items-center justify-content-center" onclick="openCartModal()">
+    <i class="fa-solid fa-cart-shopping fs-4 text-charcoal"></i>
+    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cartBadge">0</span>
+  </button>
+
+  <!-- MODAL DE ALQUILER -->
+  <div class="modal fade" id="rentalModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content modal-vintage-bg">
+        <div class="modal-header border-pastel">
+          <h5 class="modal-title vintage-title text-charcoal fw-bold"><i class="fa-solid fa-key me-2 text-coral"></i> Configurar Alquiler VIP</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-4">
+            <div class="col-md-5 text-center">
+              <img id="rentalModalImg" src="" class="img-fluid rounded border-pastel shadow-sm mb-3" alt="Vehículo">
+              <h4 id="rentalModalModel" class="text-charcoal fw-bold mb-1 vintage-title"></h4>
+              <p id="rentalModalBrand" class="text-charcoal-soft mb-0"></p>
+            </div>
+            <div class="col-md-7">
+              <form id="rentalForm">
+                <input type="hidden" id="rentalItemCode">
+                <div class="mb-3">
+                  <label class="form-label text-charcoal fw-semibold">Modalidad de Renta:</label>
+                  <div class="btn-group w-100" role="group">
+                    <input type="radio" class="btn-check" name="rentalType" id="typeDays" value="dia" checked onchange="updateRentalCalc()">
+                    <label class="btn btn-pastel-tab" for="typeDays">Por Día(s)</label>
+                    <input type="radio" class="btn-check" name="rentalType" id="typeHours" value="hora" onchange="updateRentalCalc()">
+                    <label class="btn btn-pastel-tab" for="typeHours">Por Hora(s)</label>
+                  </div>
+                </div>
+
+                <div class="row g-2 mb-3">
+                  <div class="col-6">
+                    <label for="rentalDurationInput" class="form-label text-charcoal fw-semibold">Duración:</label>
+                    <input type="number" id="rentalDurationInput" class="form-control bg-white text-charcoal border-pastel" min="1" value="3" oninput="updateRentalCalc()">
+                  </div>
+                  <div class="col-6">
+                    <label for="rentalStartDate" class="form-label text-charcoal fw-semibold">Fecha Inicio:</label>
+                    <input type="date" id="rentalStartDate" class="form-control bg-white text-charcoal border-pastel" value="2026-10-27">
+                  </div>
+                </div>
+
+                <div class="p-3 rounded border-pastel mb-3" style="background-color: #fcf6bd;">
+                  <div class="d-flex justify-content-between mb-1">
+                    <span class="text-charcoal">Tarifa Aplicada:</span>
+                    <span class="text-charcoal fw-bold" id="rentalModalRate">$0 USD</span>
+                  </div>
+                  <div class="d-flex justify-content-between mb-1">
+                    <span class="text-charcoal">Depósito de Fianza:</span>
+                    <span class="text-charcoal fw-bold">$500 USD (Reembolsable)</span>
+                  </div>
+                  <hr class="my-2">
+                  <div class="d-flex justify-content-between">
+                    <span class="text-charcoal fw-bold">Subtotal Estimado:</span>
+                    <span class="text-charcoal fs-5 fw-bold" id="rentalModalSubtotal">$0 USD</span>
+                  </div>
+                </div>
+
+                <div class="p-3 rounded mb-3" style="background-color: #a8e6cf; border: 1px solid #2b2d42; color: #2b2d42;">
+                  <i class="fa-solid fa-shield-halved me-1"></i> <strong>Póliza Platinum Incluida:</strong> Cobertura total, tanque lleno 100% y emisión de Contrato Oficial con firmas legales.
+                </div>
+
+                <button type="button" class="btn btn-pastel-coral w-100 fw-bold py-2" onclick="confirmAddToCartRental()">
+                  <i class="fa-solid fa-cart-plus me-2"></i> Añadir Alquiler al Carrito
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL CARRITO DE COMPRAS -->
+  <div class="modal fade" id="cartModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content modal-vintage-bg">
+        <div class="modal-header border-pastel">
+          <h5 class="modal-title vintage-title text-charcoal fw-bold"><i class="fa-solid fa-cart-shopping me-2 text-coral"></i> Carrito de Reservas y Compras</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div id="cartItemsList" class="mb-4"></div>
+
+          <div id="cartSummaryBox" class="p-3 rounded border-pastel" style="background-color: #fcf6bd;">
+            <div class="d-flex justify-content-between mb-1"><span class="text-charcoal">Subtotal Bruto:</span><span id="cartSubtotal" class="text-charcoal fw-bold">$0.00</span></div>
+            <div class="d-flex justify-content-between mb-1"><span class="text-charcoal">Impuestos (ITBIS 18%):</span><span id="cartTaxes" class="text-charcoal fw-bold">$0.00</span></div>
+            <div class="d-flex justify-content-between mb-1"><span class="text-charcoal">Depósito Fianza Total:</span><span id="cartDeposit" class="text-charcoal fw-bold">$0.00</span></div>
+            <hr>
+            <div class="d-flex justify-content-between fs-5"><span class="text-charcoal fw-bold">TOTAL A PAGAR:</span><span id="cartTotal" class="text-charcoal fw-bold">$0.00</span></div>
+          </div>
+        </div>
+        <div class="modal-footer border-pastel justify-content-between">
+          <button class="btn btn-outline-danger btn-sm" onclick="clearCart()"><i class="fa-solid fa-trash me-1"></i> Vaciar Carrito</button>
+          <div>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Seguir Explorando</button>
+            <button type="button" class="btn btn-pastel-coral fw-bold" onclick="openCheckoutModal()"><i class="fa-solid fa-credit-card me-1"></i> Ir al Checkout</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL PASARELA DE PAGO VIP -->
+  <div class="modal fade" id="checkoutModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+      <div class="modal-content modal-vintage-bg">
+        <div class="modal-header border-pastel">
+          <h5 class="modal-title vintage-title text-charcoal fw-bold"><i class="fa-solid fa-lock me-2 text-coral"></i> Pasarela de Pago VIP Cifrada</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-4">
+            <div class="col-lg-7">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h6 class="text-charcoal fw-bold m-0"><i class="fa-solid fa-id-card me-2"></i> Datos del Titular y Entrega</h6>
+                <button type="button" class="btn btn-sm btn-pastel-mint" onclick="fillDefaultVIPData()">⚡ Rellenar Datos Ficticios de Prueba (Demo VIP)</button>
+              </div>
+
+              <form id="checkoutForm" class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label text-charcoal fw-semibold">Nombre y Apellidos</label>
+                  <input type="text" id="custName" class="form-control bg-white text-charcoal border-pastel" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label text-charcoal fw-semibold">Documento / Cédula</label>
+                  <input type="text" id="custDoc" class="form-control bg-white text-charcoal border-pastel" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label text-charcoal fw-semibold">Licencia de Conducir VIP</label>
+                  <input type="text" id="custLic" class="form-control bg-white text-charcoal border-pastel">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label text-charcoal fw-semibold">Teléfono Móvil</label>
+                  <input type="text" id="custPhone" class="form-control bg-white text-charcoal border-pastel" required>
+                </div>
+                <div class="col-md-12">
+                  <label class="form-label text-charcoal fw-semibold">Correo Electrónico</label>
+                  <input type="email" id="custEmail" class="form-control bg-white text-charcoal border-pastel" required>
+                </div>
+                <div class="col-md-12">
+                  <label class="form-label text-charcoal fw-semibold">Dirección de Entrega VIP</label>
+                  <input type="text" id="custAddress" class="form-control bg-white text-charcoal border-pastel" required>
+                </div>
+
+                <hr class="my-3">
+                <h6 class="text-charcoal fw-bold mb-2"><i class="fa-regular fa-credit-card me-2"></i> Detalles de Tarjeta Simulada</h6>
+                <div class="col-md-6">
+                  <label class="form-label text-charcoal fw-semibold">Número de Tarjeta</label>
+                  <input type="text" id="cardNum" class="form-control bg-white text-charcoal border-pastel" required>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label text-charcoal fw-semibold">Vencimiento</label>
+                  <input type="text" id="cardExp" class="form-control bg-white text-charcoal border-pastel" required>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label text-charcoal fw-semibold">Código CVV</label>
+                  <input type="password" id="cardCvv" class="form-control bg-white text-charcoal border-pastel" maxlength="4" required>
+                </div>
+              </form>
+            </div>
+
+            <div class="col-lg-5">
+              <div class="p-3 rounded border-pastel h-100 d-flex flex-column justify-content-between" style="background-color: #a0c4ff;">
+                <div>
+                  <h6 class="text-charcoal fw-bold mb-3 border-bottom border-dark pb-2"><i class="fa-solid fa-receipt me-2"></i> Resumen Final de Transacción</h6>
+                  <div id="checkoutItemsList" class="small mb-3"></div>
+                  <div class="d-flex justify-content-between mb-1"><span class="text-charcoal">Subtotal:</span><span id="chkSubtotal" class="text-charcoal fw-bold">$0.00</span></div>
+                  <div class="d-flex justify-content-between mb-1"><span class="text-charcoal">ITBIS (18%):</span><span id="chkTaxes" class="text-charcoal fw-bold">$0.00</span></div>
+                  <div class="d-flex justify-content-between mb-1"><span class="text-charcoal">Fianza Reembolsable:</span><span id="chkDeposit" class="text-charcoal fw-bold">$0.00</span></div>
+                  <hr>
+                  <div class="d-flex justify-content-between fs-4 text-charcoal fw-bold"><span>Total a Procesar:</span><span id="chkTotal">$0.00</span></div>
+                </div>
+                <div class="mt-4">
+                  <button type="button" class="btn btn-pastel-coral w-100 fw-bold py-3 fs-5 shadow" onclick="processPaymentAndGeneratePDF()">
+                    <i class="fa-solid fa-file-pdf me-2"></i> Procesar Pago & Descargar PDF
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER PERSONALIZADO: GENESIS CABA (ESTILO VINTAGE, SOLO IG, FB Y YT) -->
+  <footer>
+    <div class="container">
+      <img src="genesis caba.jpg" class="footer-avatar" alt="Genesis Caba" onerror="this.src='https://cdn-icons-png.flaticon.com/512/4140/4140047.png'">
+      <h4 class="vintage-title">Genesis Caba</h4>
+      <p class="bio">
+        Apasionada por el diseño web y enamorada del <strong>estilo vintage</strong>. Me encanta combinar la nostalgia clásica de los años 60 con los tonos pastel y la tecnología moderna para crear experiencias únicas.
+      </p>
+
+      <div class="social-icons-footer">
+        <a href="https://www.instagram.com/ellina_kristi/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://web.facebook.com/profile.php?id=100093795992283&_rdc=1&_rdr#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.youtube.com/@genesismoreno402" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+      </div>
+
+      <hr class="my-4" style="border-color: rgba(43, 45, 66, 0.2);">
+      <p class="mb-0" style="color: #2b2d42; font-size: 14px;">© 2026 Luxury Motors Elite Corp | Diseñado con amor por <strong>Genesis Caba</strong></p>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="pdf_thumbnails.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
