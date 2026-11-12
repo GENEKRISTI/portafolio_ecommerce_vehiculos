@@ -29,6 +29,7 @@ Una vez que todo funcionaba perfecto en mi computadora, subí el proyecto a GitH
 
 <img width="681" height="383" alt="image" src="https://github.com/user-attachments/assets/6088576d-fc9a-4e44-9842-fe6f5f22815b" />
 
+<img width="886" height="468" alt="image" src="https://github.com/user-attachments/assets/11cb532d-53d2-404c-9b90-c6bd5ade0c14" />
 
 
 Paso 3: Desplegar en Vercel
@@ -42,6 +43,9 @@ Para que cualquier persona pueda ver mi página en internet:
 <img width="724" height="407" alt="image" src="https://github.com/user-attachments/assets/a3461884-5408-4fb5-865f-0f0183f80268" />
 
 <img width="619" height="348" alt="image" src="https://github.com/user-attachments/assets/0fbccfd2-abd6-47d2-b8df-220b3d1ac0cd" />
+
+![Uploading image.png…]()
+
 
 
 
