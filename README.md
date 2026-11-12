@@ -44,7 +44,7 @@ Para que cualquier persona pueda ver mi página en internet:
 
 <img width="619" height="348" alt="image" src="https://github.com/user-attachments/assets/0fbccfd2-abd6-47d2-b8df-220b3d1ac0cd" />
 
-![Uploading image.png…]()
+<img width="818" height="495" alt="image" src="https://github.com/user-attachments/assets/aff0d160-a0c4-4bd8-b59a-86240448671c" />
 
 
 
